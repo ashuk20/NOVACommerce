@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nova_commerce/features/home/screens/home_screen.dart';
 import 'package:nova_commerce/features/products/screens/products_screen.dart';
 
 void main() {
-  runApp(const NovaCommerceApp());
+  runApp(const ProviderScope(child: NovaCommerceApp()));
 }
 
 class NovaCommerceApp extends StatelessWidget {
@@ -14,7 +16,7 @@ class NovaCommerceApp extends StatelessWidget {
       title: 'NOVA Commerce',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      home: const ProductsScreen(),
+      home: const HomeScreen(),
     );
   }
 }

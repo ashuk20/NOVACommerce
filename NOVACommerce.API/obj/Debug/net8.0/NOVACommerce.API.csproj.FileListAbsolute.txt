@@ -141,3 +141,4 @@ D:\Ashwini\.NET\NOVACommerce\NOVACommerce.API\bin\Debug\net8.0\NOVACommerce.API.
 D:\Ashwini\.NET\NOVACommerce\NOVACommerce.API\bin\Debug\net8.0\NOVACommerce.API.pdb
 D:\Ashwini\.NET\NOVACommerce\NOVACommerce.API\obj\Debug\net8.0\NOVACommerce.API.genruntimeconfig.cache
 D:\Ashwini\.NET\NOVACommerce\NOVACommerce.API\obj\Debug\net8.0\ref\NOVACommerce.API.dll
+D:\Ashwini\.NET\NOVACommerce\NOVACommerce.API\obj\Debug\net8.0\NOVACommerce.API.sourcelink.json

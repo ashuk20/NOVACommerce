@@ -19,7 +19,7 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductResponseDto>>> GetProducts()
     {
-        var products = await _context.Products.AsNoTracking().Include(p => p.Category).Select(p => new ProductResponseDto { Id = p.Id, Name = p.Name, Description = p.Description, Price = p.Price, ImageUrl = p.ImageUrl, StockQuantity = p.StockQuality, CategoryId = p.CategoryId, CategoryName = p.Category.Name }).ToListAsync();
+        var products = await _context.Products.AsNoTracking().Include(p => p.Category).Select(p => new ProductResponseDto { Id = p.Id, Name = p.Name, Description = p.Description, Price = p.Price, ImageUrl = p.ImageUrl, StockQuantity = p.StockQuantity, CategoryId = p.CategoryId, CategoryName = p.Category.Name }).ToListAsync();
         return Ok(products);
 
     }
@@ -27,7 +27,7 @@ public class ProductsController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductResponseDto>> GetProduct(int id)
     {
-        var product = await _context.Products.AsNoTracking().Include(p => p.Category).Where(p => p.Id == id).Select(p => new ProductResponseDto { Id = p.Id, Name = p.Name, Description = p.Description, Price = p.Price, ImageUrl = p.ImageUrl, StockQuantity = p.StockQuality, CategoryId = p.CategoryId, CategoryName = p.Category.Name }).FirstOrDefaultAsync();
+        var product = await _context.Products.AsNoTracking().Include(p => p.Category).Where(p => p.Id == id).Select(p => new ProductResponseDto { Id = p.Id, Name = p.Name, Description = p.Description, Price = p.Price, ImageUrl = p.ImageUrl, StockQuantity = p.StockQuantity, CategoryId = p.CategoryId, CategoryName = p.Category.Name }).FirstOrDefaultAsync();
 
         if (product == null)
         {
@@ -49,7 +49,7 @@ public class ProductsController : ControllerBase
             return BadRequest("Price can not be nagative.");
         }
 
-        if (request.StockQuality < 0)
+        if (request.StockQuantity < 0)
         {
             return BadRequest("Stock quantity cannot be nagative.");
         }
@@ -65,7 +65,8 @@ public class ProductsController : ControllerBase
             Name = request.Name.Trim(),
             Description = request.Description,
             Price = request.Price,
-            StockQuality = request.StockQuality,
+            ImageUrl = request.ImageUrl,
+            StockQuantity = request.StockQuantity,
             CategoryId = request.CategoryId,
         };
 
@@ -73,7 +74,7 @@ public class ProductsController : ControllerBase
 
         await _context.SaveChangesAsync();
 
-        var response = await _context.Products.AsNoTracking().Include(p => p.Category).Where(p => p.Id == product.Id).Select(p => new ProductResponseDto { Id = p.Id, Name = p.Name, Description = p.Description, Price = p.Price, ImageUrl = p.ImageUrl, StockQuantity = p.StockQuality, CategoryId = p.CategoryId, CategoryName = p.Category.Name }).FirstAsync();
+        var response = await _context.Products.AsNoTracking().Include(p => p.Category).Where(p => p.Id == product.Id).Select(p => new ProductResponseDto { Id = p.Id, Name = p.Name, Description = p.Description, Price = p.Price, ImageUrl = p.ImageUrl, StockQuantity = p.StockQuantity, CategoryId = p.CategoryId, CategoryName = p.Category.Name }).FirstAsync();
 
         return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, response);
     }
