@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nova_commerce/features/products/models/product.dart';
 
-class ProductDetailsScreen extends StatefulWidget {
+import 'package:nova_commerce/features/cart/providers/cart_provider.dart';
+
+class ProductDetailsScreen extends ConsumerStatefulWidget {
   final Product product;
   const ProductDetailsScreen({super.key, required this.product});
 
   @override
-  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+  ConsumerState<ProductDetailsScreen> createState() =>
+      _ProductDetailsScreenState();
 }
 
-class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
   int quantity = 1;
   bool isFavorite = false;
   @override
@@ -52,6 +56,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           quantity = value;
                         });
                       },
+                      onAddToCart: () {
+                        ref
+                            .read(cartProvider.notifier)
+                            .addToCart(product, quantity: quantity);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Added to cart')),
+                        );
+                      },
                     );
                   }
                   return _DesktopLayout(
@@ -68,6 +80,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       setState(() {
                         quantity = value;
                       });
+                    },
+                    onAddToCart: () {
+                      ref
+                          .read(cartProvider.notifier)
+                          .addToCart(product, quantity: quantity);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Added to cart')),
+                      );
                     },
                   );
                 },
@@ -87,6 +107,7 @@ class _DesktopLayout extends StatelessWidget {
   final bool isOutOfStock;
   final VoidCallback onFavorite;
   final ValueChanged<int> onQuantityChanged;
+  final VoidCallback onAddToCart;
   const _DesktopLayout({
     required this.product,
     required this.quantity,
@@ -94,6 +115,7 @@ class _DesktopLayout extends StatelessWidget {
     required this.isOutOfStock,
     required this.onFavorite,
     required this.onQuantityChanged,
+    required this.onAddToCart,
   });
 
   @override
@@ -118,6 +140,7 @@ class _DesktopLayout extends StatelessWidget {
             quantity: quantity,
             isOutOfStock: isOutOfStock,
             onQuantityChanged: onQuantityChanged,
+            onAddToCart: onAddToCart,
           ),
         ),
       ],
@@ -132,6 +155,7 @@ class _MobileLayout extends StatelessWidget {
   final bool isOutOfStock;
   final VoidCallback onFavorite;
   final ValueChanged<int> onQuantityChanged;
+  final VoidCallback onAddToCart;
   const _MobileLayout({
     required this.product,
     required this.quantity,
@@ -139,6 +163,7 @@ class _MobileLayout extends StatelessWidget {
     required this.isOutOfStock,
     required this.onFavorite,
     required this.onQuantityChanged,
+    required this.onAddToCart,
   });
 
   @override
@@ -158,6 +183,7 @@ class _MobileLayout extends StatelessWidget {
           quantity: quantity,
           isOutOfStock: isOutOfStock,
           onQuantityChanged: onQuantityChanged,
+          onAddToCart: onAddToCart,
         ),
       ],
     );
@@ -253,12 +279,14 @@ class _ProductInformation extends StatelessWidget {
   final int quantity;
   final bool isOutOfStock;
   final ValueChanged<int> onQuantityChanged;
+  final VoidCallback onAddToCart;
 
   const _ProductInformation({
     required this.product,
     required this.quantity,
     required this.isOutOfStock,
     required this.onQuantityChanged,
+    required this.onAddToCart,
   });
 
   @override
@@ -337,8 +365,8 @@ class _ProductInformation extends StatelessWidget {
             width: double.infinity,
             height: 54,
             child: ElevatedButton(
-              onPressed: () {},
-              child: const Text(
+              onPressed: onAddToCart,
+              child: Text(
                 'ADD TO CART',
                 style: TextStyle(fontWeight: FontWeight.w700, letterSpacing: 1),
               ),
