@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NOVACommerce.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+409860d9b1d62358d1e2473fa00f5bc7d1e5f680")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b580830bdaf1def4ceab578ae44d42081049901b")]
 [assembly: System.Reflection.AssemblyProductAttribute("NOVACommerce.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NOVACommerce.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

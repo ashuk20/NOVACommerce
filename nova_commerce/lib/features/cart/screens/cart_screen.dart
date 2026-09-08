@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nova_commerce/features/cart/models/cart_item.dart';
 import 'package:nova_commerce/features/cart/providers/cart_provider.dart';
+import 'package:nova_commerce/features/checkout/screeens/checkout_screen.dart';
 
 class CartScreen extends ConsumerWidget {
   const CartScreen({super.key});
@@ -372,7 +373,11 @@ class _CartSummary extends StatelessWidget {
             width: double.infinity,
             height: 54,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const CheckoutScreen()),
+                );
+              },
               child: const Text(
                 'PROCEED TO CHECKOUT',
                 style: TextStyle(fontWeight: FontWeight.w700, letterSpacing: 1),

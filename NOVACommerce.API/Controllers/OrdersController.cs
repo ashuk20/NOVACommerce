@@ -25,6 +25,7 @@ public class OrdersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<OrderResponseDto>> CreateOrder(CreateOrderRequestDto request)
     {
+        Console.WriteLine($"Customer name :{request.CustomerName}");
         if (string.IsNullOrWhiteSpace(request.CustomerName))
         {
             return BadRequest("Customer name is required.");
@@ -88,7 +89,8 @@ public class OrdersController : ControllerBase
         };
 
         decimal subtotal = 0;
-        foreach (var item in request.Items)
+        foreach (var item in request.
+        s)
         {
             var product = products.First(p => p.Id == item.ProductId);
 
