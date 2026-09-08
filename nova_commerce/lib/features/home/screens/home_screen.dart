@@ -49,13 +49,12 @@ class HomeScreen extends ConsumerWidget {
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return ProductCard(product: product[index]);
                   }, childCount: product.length),
-                  gridDelegate:
-                      const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 280,
-                        mainAxisExtent: 390,
-                        crossAxisSpacing: 24,
-                        mainAxisSpacing: 32,
-                      ),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 280,
+                    mainAxisExtent: 390,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 32,
+                  ),
                 ),
               );
             },

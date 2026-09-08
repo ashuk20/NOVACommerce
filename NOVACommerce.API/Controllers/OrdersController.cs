@@ -89,8 +89,7 @@ public class OrdersController : ControllerBase
         };
 
         decimal subtotal = 0;
-        foreach (var item in request.
-        s)
+        foreach (var item in request.Items)
         {
             var product = products.First(p => p.Id == item.ProductId);
 

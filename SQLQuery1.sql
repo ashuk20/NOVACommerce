@@ -8,7 +8,13 @@ SELECT
 FROM Products
 ORDER BY Id;
 
-Select * from Products;
+
+SELECT COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'Orders'
+ORDER BY ORDINAL_POSITION;
+
+Select * from Orders
 
 SELECT Id, Name, IsActive
 FROM Categories
